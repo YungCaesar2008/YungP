@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Tổng Hợp</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e1e2e, #252540);
+            color: rgb(255, 0, 0);
+            text-align: center;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: center;
+            background: #000000;
+            padding: 15px 0;
+        }
+
+        .menu button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            margin: 0 15px;
+            cursor: pointer;
+            padding: 10px;
+            transition: 0.3s;
+        }
+
+        .menu button:hover {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        .content {
+            display: none;
+            padding: 20px;
+        }
+
+        .active {
+            display: block;
+        }
+
+        iframe {
+            width: 80%;
+            height: 500px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.6);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="menu">
+        <button onclick="showContent('video')">Bài 1 - Video</button>
+        <button onclick="showContent('maps')">Bài 2 - Google Maps</button>
+        <button onclick="showContent('chat')">Bài 3 - Chat</button>
+    </div>
+
+    <div id="video" class="content active">
+        <h1>Bài 1 - Video YouTube</h1>
+        <iframe src="https://www.youtube.com/embed/gkC-HPugDco?si=BXGE6toKhT1p2dta" allowfullscreen></iframe>
+    </div>
+
+    <div id="maps" class="content">
+        <h1>Bài 2 - Google Maps</h1>
+        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1CfSeAraYUxYDCI0MkGtOoUXsZFWRuvE&ehbc=2E312F"></iframe>
+    </div>
+
+    <div id="chat" class="content">
+        <h1>Bài 3 - Hệ Thống Chat</h1>
+        <script src="https://uhchat.net/code.php?f=0192ae"></script>
+    </div>
+
+    <script>
+        function showContent(id) {
+            let contents = document.querySelectorAll('.content');
+            contents.forEach(content => content.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+    </script>
+</body>
+
+</html>

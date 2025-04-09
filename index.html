@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Website Tổng Hợp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -53,6 +54,65 @@
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0, 255, 255, 0.6);
         }
+
+        /* Facebook Integration Styles */
+        .facebook-integration {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f5f6f5;
+            border-radius: 5px;
+        }
+
+        .fb-like-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        /* AI Support Styles */
+        .ai-chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .ai-chat-container button {
+            background: #ff6200;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        #ai-chat-box {
+            display: none;
+            width: 300px;
+            height: 400px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        #ai-messages {
+            height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        #ai-input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
     </style>
 </head>
 
@@ -66,23 +126,95 @@
     <div id="video" class="content active">
         <h1>Bài 1 - Video YouTube</h1>
         <iframe src="https://www.youtube.com/embed/gkC-HPugDco?si=BXGE6toKhT1p2dta" allowfullscreen></iframe>
+        <section class="facebook-integration">
+            <div class="fb-comments" data-href="https://www.youtube.com/watch?v=gkC-HPugDco" data-width="100%"
+                data-numposts="5"></div>
+            <div class="fb-like-container">
+                <div class="fb-like" data-href="https://www.youtube.com/watch?v=gkC-HPugDco" data-layout="button_count"
+                    data-action="like" data-size="large" data-share="true"></div>
+            </div>
+        </section>
     </div>
 
     <div id="maps" class="content">
         <h1>Bài 2 - Google Maps</h1>
         <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1CfSeAraYUxYDCI0MkGtOoUXsZFWRuvE&ehbc=2E312F"></iframe>
+        <section class="facebook-integration">
+            <div class="fb-comments"
+                data-href="https://www.google.com/maps/d/u/0/embed?mid=1CfSeAraYUxYDCI0MkGtOoUXsZFWRuvE"
+                data-width="100%" data-numposts="5"></div>
+            <div class="fb-like-container">
+                <div class="fb-like"
+                    data-href="https://www.google.com/maps/d/u/0/embed?mid=1CfSeAraYUxYDCI0MkGtOoUXsZFWRuvE"
+                    data-layout="button_count" data-action="like" data-size="large" data-share="true"></div>
+            </div>
+        </section>
     </div>
 
     <div id="chat" class="content">
         <h1>Bài 3 - Hệ Thống Chat</h1>
         <script src="https://uhchat.net/code.php?f=0192ae"></script>
+        <section class="facebook-integration">
+            <div class="fb-comments" data-href="https://uhchat.net/code.php?f=0192ae" data-width="100%"
+                data-numposts="5"></div>
+            <div class="fb-like-container">
+                <div class="fb-like" data-href="https://uhchat.net/code.php?f=0192ae" data-layout="button_count"
+                    data-action="like" data-size="large" data-share="true"></div>
+            </div>
+        </section>
     </div>
+    <section class="ai-support">
+        <div class="ai-chat-container">
+            <button onclick="toggleChat()">
+                <i class="fa-solid fa-robot"></i> Chat với AI
+            </button>
+            <div id="ai-chat-box">
+                <div style="background: #ff6200; color: white; padding: 10px; text-align: center;">
+                    Hỗ trợ AI - Website Tổng Hợp
+                </div>
+                <div id="ai-messages">
+                    <p>Chào bạn! Tôi là AI hỗ trợ. Bạn khỏe không?</p>
+                </div>
+                <div style="padding: 10px; border-top: 1px solid #ddd;">
+                    <input type="text" id="ai-input" placeholder="Nhập câu hỏi..."
+                        onkeypress="if(event.key === 'Enter') sendMessage()">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0"></script>
 
     <script>
         function showContent(id) {
             let contents = document.querySelectorAll('.content');
             contents.forEach(content => content.classList.remove('active'));
             document.getElementById(id).classList.add('active');
+        }
+
+
+        function toggleChat() {
+            const chatBox = document.getElementById('ai-chat-box');
+            chatBox.style.display = chatBox.style.display === 'none' ? 'block' : 'none';
+        }
+
+
+        function sendMessage() {
+            const input = document.getElementById('ai-input');
+            const messages = document.getElementById('ai-messages');
+            const userMessage = input.value.trim();
+
+            if (userMessage) {
+                messages.innerHTML += `<p style="text-align: right; color: #ff6200; margin: 5px 0;">Bạn: ${userMessage}</p>`;
+                setTimeout(() => {
+                    messages.innerHTML += `<p style="text-align: left; color: #333; margin: 5px 0;">AI: Chào bạn! Tôi có thể giúp gì cho bạn hôm nay?</p>`;
+                    messages.scrollTop = messages.scrollHeight;
+                }, 1000);
+                input.value = '';
+                messages.scrollTop = messages.scrollHeight;
+            }
         }
     </script>
 </body>
